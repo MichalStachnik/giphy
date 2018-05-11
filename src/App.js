@@ -21,7 +21,6 @@ class App extends Component {
     return (
       <div>
         <input onKeyUp={this.onInputChange}/>
-        <p>from app: {this.state.searchVal}</p>
         <Search value={this.state.searchVal}/>
       </div>
     );

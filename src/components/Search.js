@@ -9,22 +9,16 @@ class Search extends Component {
       selectedImg: null
     }
   }
+  //one behind in search right now
   componentWillReceiveProps(newProps){
     this.setState({searchVal: newProps.value})
     let url = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchVal}&api_key=TvKQCH3GjnVigxzQ8GipgTTdrXDk6KJS`;
     fetch(url)
       .then(res => res.json())
       .then(myData => this.setState({
-        imgArray: myData.data
+        imgArray: myData.data.splice(0,8)
       }, () => console.log('from componentWillReceiveProps',this.state)));
-  }
-  componentWillMount() {
-    let url = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchVal}&api_key=TvKQCH3GjnVigxzQ8GipgTTdrXDk6KJS`;
-    fetch(url)
-      .then(res => res.json())
-      .then(myData => this.setState({
-        imgArray: myData.data
-      }, () => console.log('from componentWillMount',this.state)));
+      
   }
   handleImgClick = (img) => {
     console.log(img);
@@ -38,21 +32,26 @@ class Search extends Component {
     if(this.state.imgArray.length > 0){
       return(
         <div>
-          {selectedImage ?  <img src={selectedImage.images.fixed_height.url} /> : 'nonthing'}
-          <h1>from search: {this.props.value}</h1>
+          {selectedImage ?  <img src={selectedImage.images.fixed_height.url} /> : ''}
           {console.log('this.state',this.state)}
-          <ul>
-            {this.state.imgArray.map((image) => {
-              return <img alt="" width="100" onClick={() => this.handleImgClick(image)} key={image.id} src={image.images.downsized.url}/>;
-            })}
-          </ul>
+          <div className="gifs">
+            <ul>
+              {this.state.imgArray.map((image, index) => {
+                return (
+                  <li key={image.id} className={`gif${index}`}>
+                    <img alt="" onClick={() => this.handleImgClick(image)} src={image.images.downsized.url}/>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       );
     }
     //waiting for http request
     else{
       return(
-        <p>still loading</p>
+        <p>waiting</p>
       );
     }
   }
