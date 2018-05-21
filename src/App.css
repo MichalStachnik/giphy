@@ -7,18 +7,38 @@ ul{
 body{
   background: #353535;
 }
-
+p{
+  color: #fff;
+  text-align: center;
+}
 li{
   padding: 20px;
   list-style-type: none;
 }
-
 img{
   width: 100%;
+  cursor: pointer;
 }
-
+.clear{
+  display: inline-block;
+  margin-left:30px;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .2s all linear;
+  font-size:14px;
+}
+.clear:hover{
+  background: #fff;
+  color: #222;
+}
+.container{
+  text-align: center;
+}
 input{
-  display: block;
+  display: inline-block;
   margin: 50px auto 0;
   padding: 10px;
   border: 2px solid springgreen;
@@ -29,7 +49,27 @@ input{
 input:focus{
   outline: none;
 }
-
+p{
+  margin-top:1px;
+  margin-bottom:1px;
+  font-size: 10px;
+}
+.modalContainer{
+  transition: all 1s ease-in-out;
+  position:absolute;
+  width: 90%;
+  left: 5%;
+}
+.gifs{
+  z-index: 1;
+}
+.modalImg{
+  border: 3px solid #fff;
+  border-radius:4px;
+}
+.mt-15{
+  margin-top:15px;
+}
 /* Top row */
 .gif0{
   grid-row: 1 / 2;
